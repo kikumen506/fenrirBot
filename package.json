@@ -14,6 +14,7 @@
     "pug": "2.0.0-beta11",
     "sync-request": "^6.0.0",
     "telegraf": "^3.27.1",
+    "telegraf-wit": "^2.1.0",
     "weather-js": "^2.0.0"
   }
 }

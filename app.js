@@ -6,6 +6,11 @@ const dialog = require('./dialog')
 const googleTTS = require('google-tts-api')
 
 const app = express()
+
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+
 const bot = new Telegraf("777516604:AAFjZ7OwP0TpoidSEOsdgKe9AUHXUQAT2Hc")
 
 bot.telegram.setWebhook('https://fenrirbot.herokuapp.com/ruta-secreta')
@@ -79,6 +84,15 @@ bot.on('text', (ctx)=>{
       bot.telegram.sendMessage(ctx.from.id, response)
     })
   
+})
+
+express.post('/chatbot', (req, res)=>{
+  let msg = req.body.mensaje
+  nlu(mensaje)
+    .then(dialog)
+    .then((response)=>{
+      res.json({mensaje: response})
+    })
 })
 
 app.listen(process.env.PORT || 3333, () => {

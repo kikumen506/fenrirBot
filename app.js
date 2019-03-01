@@ -2,11 +2,13 @@ var express = require('express');
 var request = require('sync-request')
 const Telegraf = require('telegraf')
 const nlu = require('./nlu')
+const dialog = require('./dialog')
+const googleTTS = require('google-tts-api')
 
 const app = express()
 const bot = new Telegraf("777516604:AAFjZ7OwP0TpoidSEOsdgKe9AUHXUQAT2Hc")
 
-bot.telegram.setWebhook('https://ee7d29cc.ngrok.io/ruta-secreta')
+bot.telegram.setWebhook('https://fenrirbot.herokuapp.com/ruta-secreta')
 
 app.get('/', (req, res) => res.send('Hello World!'))
 app.use(bot.webhookCallback('/ruta-secreta'))
@@ -68,8 +70,15 @@ bot.command('whereami', (ctx) => {
 })
 
 bot.on('text', (ctx)=>{
-  nlu(ctx.message.text)
-  ctx.reply(ctx.message)
+  nlu(ctx.message)
+    .then(dialog)
+    .then((response)=>{
+      googleTTS(response, "es-ES", 2).then((url)=>{
+        bot.telegram.sendAudio(ctx.from.id, url)
+      })
+      bot.telegram.sendMessage(ctx.from.id, response)
+    })
+  
 })
 
 app.listen(3333, () => {

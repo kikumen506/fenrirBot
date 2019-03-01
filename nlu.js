@@ -4,8 +4,9 @@ const wit = new TelegrafWit('RW6CG24E72IHKLTCCSMLENVBRJDXEDT5')
 
 module.exports = (message)=>{
     return new Promise((resolve,reject)=>{
-        wit.meaning(message).then((result)=>{
-            console.log(result)
+        wit.meaning(message.text).then((result)=>{
+            message.nlu = result
+            resolve(message)
         })
     })
 }

@@ -86,14 +86,14 @@ bot.on('text', (ctx)=>{
   
 })
 
-express.post('/chatbot', (req, res)=>{
-  let msg = req.body.mensaje
-  nlu(mensaje)
-    .then(dialog)
-    .then((response)=>{
-      res.json({mensaje: response})
-    })
-})
+// express.post('/chatbot', (req, res)=>{
+//   let msg = req.body.mensaje
+//   nlu(mensaje)
+//     .then(dialog)
+//     .then((response)=>{
+//       res.json({mensaje: response})
+//     })
+// })
 
 app.listen(process.env.PORT || 3333, () => {
   console.log('Example app listening on port 3000!')

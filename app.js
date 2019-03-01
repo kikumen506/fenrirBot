@@ -74,7 +74,7 @@ bot.on('text', (ctx)=>{
     .then(dialog)
     .then((response)=>{
       googleTTS(response, "es-ES", 2).then((url)=>{
-        bot.telegram.sendAudio(ctx.from.id, url)
+        // bot.telegram.sendAudio(ctx.from.id, url)
       })
       bot.telegram.sendMessage(ctx.from.id, response)
     })

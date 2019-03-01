@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require('sync-request')
 const Telegraf = require('telegraf')
+const nlu = require('./nlu')
 
 const app = express()
 const bot = new Telegraf("777516604:AAFjZ7OwP0TpoidSEOsdgKe9AUHXUQAT2Hc")
@@ -67,6 +68,7 @@ bot.command('whereami', (ctx) => {
 })
 
 bot.on('text', (ctx)=>{
+  nlu(ctx.message.text)
   ctx.reply(ctx.message)
 })
 

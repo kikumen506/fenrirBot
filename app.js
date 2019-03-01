@@ -81,6 +81,6 @@ bot.on('text', (ctx)=>{
   
 })
 
-app.listen(3333, () => {
+app.listen(process.env.PORT || 3333, () => {
   console.log('Example app listening on port 3000!')
 })
